@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Diagnostics.Contracts;
 
 namespace Hang_Man_Skolans_upgift
@@ -140,7 +141,7 @@ namespace Hang_Man_Skolans_upgift
             bool runme = true;
             int chose;
             int val = 0;
-            int left = 0;
+            int left = 10;
             string ordet;
             string Fel = "fel";
             char[] chosed = new char[10];
@@ -239,13 +240,117 @@ namespace Hang_Man_Skolans_upgift
                         break;
                     }
                     runme = false;
+                    break;
                 }
 
 
             }
         }
 
+        public void Avancerat_Spel()
+        {
+            Console.Clear();
+            bool runme = true;
+            string ordet;
+            string Fel = "fel";
+            string svar = Hemliga_ord();
+            int lenght = svar.Length;
+            if (svar.Equals(Fel))
+            {
+                Hemliga_ord();
+            }
+            ordet = svar;
+            char[] list = ordet.ToCharArray();
+            char[] chosed = new char[lenght];
 
+
+
+            Console.WriteLine("Hej du kommit till andra spelet.");
+            Console.WriteLine();
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("Vilken du få gissa lika många försökt som ordet längdet är för att kommeletera ordet.");
+            Console.WriteLine("samtidigt du få gissa hela ordet med !");
+            Console.WriteLine("Eller om du vill komma till menu igen tyck 3 .");
+            Console.WriteLine();
+            Console.WriteLine("vill du gissa bokstavet eller hela ordet.");
+            Console.WriteLine(" 1-  för bokstav .");
+            Console.WriteLine(" 2-  hela ordet .");
+            Console.WriteLine();
+
+            while (runme)
+            {
+                int val = 0;
+                int left = lenght;
+                int chose;
+
+                Console.Clear();
+                if (val == 8)
+                {
+                    Console.WriteLine("Sista chansen !! ");
+                }
+                if (val == 9)
+                {
+                    string utvalda2 = new string(chosed);
+                    if (!svar.Equals(utvalda2))
+                    {
+                        Console.WriteLine("Tyvärr du förlurade i den spel.");
+                        Console.WriteLine("vill du köra om?  1 = ja // 2 = nej ");
+                        int i = Get_input();
+                        if (i == 1)
+                        {
+                            Menu();
+                        }
+                        runme = false;
+                        break;
+                    }
+
+                }
+                val++;
+                left--;
+                Console.Write("dina utvalda -->  ");
+                for (int i = 0; i < lenght; i++)
+                {
+                    if (chosed[i] != 0)
+                    {
+                        Console.Write(chosed[i]);
+
+                    }
+                    else
+                    {
+                        Console.Write(" _ ");
+                    }
+                }
+                Console.WriteLine("                                     Antal försök du hade gjort -> " + val);
+                Console.WriteLine("                                     Antal försök kvar ----------> " + left);
+                Console.WriteLine();
+                Console.WriteLine();
+                chose = Get_input();
+                switch (chose)
+                {
+                    case 0:
+                        Console.WriteLine("tryck inter för att avsluta spelet !");
+                        Console.ReadLine();
+                        runme = false;
+                        break;
+                    case 1:
+                        chosed[val] = Get_char();
+                        break;
+                    case 2:
+                        string ss = Get_string();
+                        int slut = vinna(ss, svar);
+                        if (slut == 1)
+                        {
+                            Menu();
+                            break;
+                        }
+                        runme = false;
+                        break;
+                }
+
+
+
+            }
+        }
 
 
 
@@ -267,14 +372,12 @@ namespace Hang_Man_Skolans_upgift
                     Console.ReadLine();
                     break;
                 case 1:
-                    Console.WriteLine("första late ");
+                    Easy_Spel();
                     break;
                 case 2:
-                    Console.WriteLine("svåra !! ");
+                    Avancerat_Spel();   
                     break;
             }
-            
-
         }
 
 
@@ -282,17 +385,7 @@ namespace Hang_Man_Skolans_upgift
 
         static void Main(string[] args)
         {
-            char[] s = new char[10];
-
-            for (int i = 0; i < 10; i++)
-            {
-                Console.WriteLine("---");
-                if(i == 8)
-                {
-                    Console.WriteLine("9");
-                }
-            }
-
+            
         }
     }
 }
