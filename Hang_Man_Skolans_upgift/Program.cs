@@ -14,7 +14,7 @@ namespace Hang_Man_Skolans_upgift
         {
             string ordet = "";
             string fel = "fel";
-            List<string> Hemligt_ord = new List<string>() { "pendla", "kollektivet", "stund", "ali", "usef", "amir", "johan", "anna", "lucian", "ammar" };
+            List<string> Hemligt_ord = new List<string>() { "pendla", "disc", "stund", "ali", "usef", "amir", "johan", "asef", "lucian", "ammar" };
             var random = new Random();
 
             int index = random.Next(Hemligt_ord.Count);
@@ -187,20 +187,15 @@ namespace Hang_Man_Skolans_upgift
 
                 if (val == 10)
                 {
-                    string utvalda2 = new string(chosed);
-                    if (svar !=utvalda2)
+                    string utvalda = new string(svar2);
+                    int slutsats = vinna(utvalda, svar);
+                    if (slutsats == 1)
                     {
-                        Console.Clear();
-                        Console.WriteLine("Tyvärr du förlurade i den spel.");
-                        Console.WriteLine("vill du köra om?  1 = ja // 2 = nej ");
-                        int i = Get_input();
-                        if(i == 1)
-                        {
-                            Menu();
-                        }
-                        runme = false;
+                        Menu();
                         break;
                     }
+                    runme = false;
+                    break;
 
                 }
                 Console.WriteLine();
@@ -282,18 +277,7 @@ namespace Hang_Man_Skolans_upgift
                         Menu();
                         break;
                 }
-                string utvalda = new string(chosed);
-                if (utvalda.Equals(svar))
-                {
-                    int slutsats = vinna(utvalda, svar);
-                    if (slutsats == 1)
-                    {
-                        Menu();
-                        break;
-                    }
-                    runme = false;
-                    break;
-                }
+
 
 
             }
@@ -332,20 +316,15 @@ namespace Hang_Man_Skolans_upgift
 
                 if (val == lenght)
                 {
-                    string utvalda2 = new string(chosed);
-                    if (svar != utvalda2)
+                    string utvalda = new string(svar2);
+                    int slutsats = vinna(utvalda, svar);
+                    if (slutsats == 1)
                     {
-                        Console.Clear();
-                        Console.WriteLine("Tyvärr du förlurade i den spel.");
-                        Console.WriteLine("vill du köra om?  1 = ja // 2 = nej ");
-                        int i = Get_input();
-                        if (i == 1)
-                        {
-                            Menu();
-                        }
-                        runme = false;
+                        Menu();
                         break;
                     }
+                    runme = false;
+                    break;
 
                 }
                 Console.WriteLine();
@@ -428,18 +407,7 @@ namespace Hang_Man_Skolans_upgift
                         Menu();
                         break;
                 }
-                string utvalda = new string(chosed);
-                if (utvalda.Equals(svar))
-                {
-                    int slutsats = vinna(utvalda, svar);
-                    if (slutsats == 1)
-                    {
-                        Menu();
-                        break;
-                    }
-                    runme = false;
-                    break;
-                }
+
 
 
             }
